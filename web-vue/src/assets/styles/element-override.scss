@@ -1,0 +1,265 @@
+/* Element Plus 主题覆盖 - 植物病害系统绿色主题 */
+
+/* ========== Element Plus 主题色变量覆盖 ========== */
+:root {
+  /* 主色调 */
+  --el-color-primary: #52c41a;
+  --el-color-primary-light-3: #95de64;
+  --el-color-primary-light-5: #b7eb8f;
+  --el-color-primary-light-7: #d9f7be;
+  --el-color-primary-light-8: #f6ffed;
+  --el-color-primary-light-9: #fcffe6;
+  --el-color-primary-dark-2: #389e0d;
+
+  /* 成功色 */
+  --el-color-success: #52c41a;
+  --el-color-success-light-3: #95de64;
+  --el-color-success-light-5: #b7eb8f;
+  --el-color-success-light-7: #d9f7be;
+  --el-color-success-light-8: #f6ffed;
+  --el-color-success-light-9: #fcffe6;
+
+  /* 警告色 */
+  --el-color-warning: #faad14;
+
+  /* 危险色 */
+  --el-color-danger: #ff4d4f;
+
+  /* 信息色 */
+  --el-color-info: #1890ff;
+
+  /* 禁用默认的focus轮廓颜色（去除蓝色边框）*/
+  --el-color-primary-light-9: rgba(82, 196, 26, 0.12);
+}
+
+/* ========== 按钮组件样式 ========== */
+.el-button--primary {
+  background: var(--gradient-primary);
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: var(--shadow-md);
+
+  &:hover,
+  &:focus {
+    background: var(--gradient-light);
+    border-color: transparent !important;
+    box-shadow: var(--shadow-hover);
+  }
+
+  &:active {
+    background: var(--gradient-dark);
+    border-color: transparent !important;
+    box-shadow: var(--button-active-shadow);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: transparent !important;
+  }
+}
+
+/* 去除所有按钮的默认蓝色边框 */
+.el-button {
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+
+  &.is-plain {
+    &:hover,
+    &:focus {
+      background-color: var(--primary-bg);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+  }
+}
+
+/* ========== 输入框组件样式 ========== */
+.el-input__wrapper {
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--input-hover-border) !important;
+  }
+
+  &.is-focus {
+    border-color: var(--input-focus-border) !important;
+    box-shadow: 0 0 0 3px rgba(82, 196, 26, 0.1) !important;
+  }
+}
+
+.el-input__inner {
+  &:focus {
+    outline: none;
+  }
+}
+
+.el-textarea__inner {
+  &:hover {
+    border-color: var(--input-hover-border);
+  }
+
+  &:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 3px rgba(82, 196, 26, 0.1);
+  }
+}
+
+/* ========== 菜单组件样式 ========== */
+.el-menu-item {
+  &.is-active {
+    color: var(--menu-active-color) !important;
+    background-color: var(--menu-active-bg) !important;
+  }
+
+  &:hover {
+    background-color: var(--menu-hover-bg) !important;
+  }
+}
+
+.el-sub-menu__title {
+  &:hover {
+    background-color: var(--menu-hover-bg) !important;
+  }
+}
+
+/* ========== 标签组件样式 ========== */
+.el-tag--primary {
+  --el-tag-bg-color: var(--primary-bg);
+  --el-tag-border-color: var(--primary-border);
+  --el-tag-text-color: var(--primary-color);
+}
+
+.el-tag--success {
+  --el-tag-bg-color: var(--primary-bg);
+  --el-tag-border-color: var(--primary-border);
+  --el-tag-text-color: var(--primary-color);
+}
+
+/* ========== 链接组件样式 ========== */
+.el-link--primary {
+  --el-link-text-color: var(--link-color);
+  --el-link-hover-text-color: var(--link-hover-color);
+}
+
+/* ========== 进度条组件样式 ========== */
+.el-progress__text {
+  color: var(--primary-color) !important;
+}
+
+.el-progress-bar__inner {
+  background: var(--gradient-primary) !important;
+}
+
+/* ========== 开关组件样式 ========== */
+.el-switch.is-checked .el-switch__core {
+  background-color: var(--primary-color) !important;
+}
+
+/* ========== 单选框组件样式 ========== */
+.el-radio__input.is-checked .el-radio__inner {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.el-radio__input.is-checked + .el-radio__label {
+  color: var(--primary-color) !important;
+}
+
+/* ========== 复选框组件样式 ========== */
+.el-checkbox__input.is-checked .el-checkbox__inner {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  color: var(--primary-color) !important;
+}
+
+/* ========== 选择器组件样式 ========== */
+.el-select-dropdown__item.selected {
+  color: var(--primary-color) !important;
+  font-weight: bold;
+}
+
+/* ========== 分页组件样式 ========== */
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: var(--primary-color) !important;
+}
+
+.el-pagination.is-background .el-pager li:hover {
+  color: var(--primary-color) !important;
+}
+
+/* ========== 加载组件样式 ========== */
+.el-loading-spinner .path {
+  stroke: var(--primary-color) !important;
+}
+
+/* ========== 通知组件样式 ========== */
+.el-notification--success .el-notification__icon {
+  color: var(--primary-color) !important;
+}
+
+/* ========== 消息提示样式 ========== */
+.el-message--success .el-message__icon {
+  color: var(--primary-color) !important;
+}
+
+/* ========== 对话框组件样式 ========== */
+.el-dialog__header {
+  border-bottom: 2px solid var(--primary-bg);
+}
+
+/* ========== 卡片组件样式 ========== */
+.el-card {
+  border-color: var(--border-light);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* ========== 表格组件样式 ========== */
+.el-table thead {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.el-table__row:hover > td {
+  background-color: var(--primary-bg) !important;
+}
+
+/* ========== 步骤条组件样式 ========== */
+.el-step__head.is-process {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.el-step__title.is-process {
+  color: var(--primary-color) !important;
+}
+
+/* ========== 滑块组件样式 ========== */
+.el-slider__bar {
+  background-color: var(--primary-color) !important;
+}
+
+.el-slider__button {
+  border-color: var(--primary-color) !important;
+}
+
+/* ========== 时间选择器样式 ========== */
+.el-picker-panel__icon-btn:hover {
+  color: var(--primary-color) !important;
+}
+
+.el-date-table td.selected .el-date-table-cell__text {
+  background-color: var(--primary-color) !important;
+}
+
+.el-date-table td.today .el-date-table-cell__text {
+  color: var(--primary-color) !important;
+}

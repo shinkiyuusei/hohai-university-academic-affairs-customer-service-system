@@ -1,0 +1,34 @@
+
+/* 全局样式重置 */
+html, body {
+  overflow: hidden !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+#app {
+  overflow: hidden !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* 确保Element Plus组件不会产生滚动条 */
+.el-container {
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+.el-main {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* 移除所有可能的滚动条 */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}

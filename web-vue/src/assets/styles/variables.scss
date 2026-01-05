@@ -1,0 +1,71 @@
+
+
+/* ========== 河海大学校务知识系统 - 全局CSS变量 ========== */
+
+:root {
+  /* ===== 主色调 - 植物绿 ===== */
+  --primary-color: #52c41a;        /* 主绿色 - 健康植物 */
+  --primary-light: #73d13d;        /* 浅绿 - 新芽 */
+  --primary-dark: #389e0d;         /* 深绿 - 叶片 */
+  --primary-bg: #f6ffed;           /* 绿色背景 */
+  --primary-border: #b7eb8f;       /* 绿色边框 */
+
+  /* ===== 辅助色调 ===== */
+  --secondary-color: #faad14;      /* 黄色 - 病害警告 */
+  --accent-color: #13c2c2;         /* 青绿 - 清新 */
+  --accent-light: #5cdbd3;         /* 浅青绿 */
+
+  /* ===== 渐变色 ===== */
+  --gradient-primary: linear-gradient(135deg, #52c41a 0%, #95de64 100%);
+  --gradient-light: linear-gradient(135deg, #73d13d 0%, #b7eb8f 100%);
+  --gradient-dark: linear-gradient(135deg, #389e0d 0%, #52c41a 100%);
+  --gradient-sidebar: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
+
+  /* ===== 状态色 ===== */
+  --success-color: #52c41a;        /* 成功 - 绿色 */
+  --warning-color: #faad14;        /* 警告 - 黄色 */
+  --danger-color: #ff4d4f;         /* 危险 - 红色（病害严重）*/
+  --info-color: #1890ff;           /* 信息 - 蓝色 */
+
+  /* ===== 中性色 ===== */
+  --bg-color: #f0f5f0;             /* 背景 - 淡绿 */
+  --bg-card: #ffffff;              /* 卡片背景 */
+  --text-primary: #2c3e50;         /* 主文本 */
+  --text-secondary: #5a6c57;       /* 次要文本 - 深绿灰 */
+  --border-color: #d9f7be;         /* 边框 - 淡绿 */
+  --border-light: #f0f5f0;         /* 浅边框 */
+
+  /* ===== 阴影 ===== */
+  --shadow-sm: 0 2px 8px rgba(82, 196, 26, 0.06);
+  --shadow-md: 0 4px 12px rgba(82, 196, 26, 0.15);
+  --shadow-lg: 0 8px 30px rgba(82, 196, 26, 0.25);
+  --shadow-hover: 0 8px 30px rgba(82, 196, 26, 0.4);
+
+  /* ===== 特定组件颜色 ===== */
+  --input-border: #d9d9d9;
+  --input-focus-border: var(--primary-color);
+  --input-hover-border: var(--primary-light);
+
+  --button-hover-bg: var(--gradient-light);
+  --button-active-shadow: 0 4px 16px rgba(82, 196, 26, 0.3);
+
+  --link-color: var(--primary-color);
+  --link-hover-color: var(--primary-light);
+
+  --chat-user-bg: var(--primary-color);
+  --chat-assistant-bg: #f5f7fa;
+  --chat-hover-bg: var(--primary-bg);
+
+  --menu-active-bg: var(--primary-bg);
+  --menu-active-color: var(--primary-color);
+  --menu-hover-bg: rgba(82, 196, 26, 0.08);
+}
+
+/* ===== SCSS 变量（兼容现有代码）===== */
+$primary-color: #52c41a;
+$primary-light: #73d13d;
+$primary-dark: #389e0d;
+$success-color: #52c41a;
+$warning-color: #faad14;
+$danger-color: #ff4d4f;
+$info-color: #1890ff;
