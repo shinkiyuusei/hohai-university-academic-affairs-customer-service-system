@@ -1,4 +1,4 @@
-# 植物病害图谱问答系统
+# 河海大学校务智能问答系统
 
 ## 项目简介
 植物病害图谱问答系统是一个基于知识图谱和自然语言处理技术的智能问答平台，旨在帮助用户查询和了解植物病害相关的专业知识。系统采用前后端分离架构，结合了知识图谱技术、文本分析和向量检索等先进技术，为用户提供准确、高效的问答服务。
@@ -187,18 +187,3 @@ VITE_API_BASE_URL=http://localhost:5000/api
 - **后端开发**：Python + Flask
 - **前端开发**：Vue 3 + TypeScript
 - **算法开发**：自然语言处理、向量检索、知识图谱
-
-## 许可证
-
-本项目采用 MIT 许可证，详情请查看 LICENSE 文件。
-
-## 联系方式
-
-如有任何问题或建议，欢迎通过以下方式联系：
-
-- 邮箱：your-email@example.com
-- GitHub：https://github.com/shinkiyuusei/hohai-university-academic-affairs-customer-service-system.git
-
----
-
-*© 2026 植物病害图谱问答系统开发团队*
