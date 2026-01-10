@@ -8,7 +8,7 @@ from datetime import datetime
 # 解决OpenMP库冲突问题
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
-from flask import Flask, request, jsonify, g
+from flask import Flask, request, jsonify, g, send_from_directory
 from flask_cors import CORS
 import requests
 from config import PORT, FILE_STORE_CONFIG
@@ -35,6 +35,10 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 CORS(app)
+
+# 静态文件目录
+STATIC_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
+app.static_folder = STATIC_FOLDER
 
 # 请求开始钩子，记录请求开始时间
 @app.before_request
@@ -67,21 +71,38 @@ app.register_blueprint(admin_bp)  # 新增：管理员控制台路由
 
 # 根路径处理
 def index():
-    return jsonify({
-        "message": "智能问答系统API服务器正在运行",
-        "version": "1.0",
-        "status": "success",
-        "api_endpoints": {
-            "qa_ask": "/api/qa/ask",
-            "qa_history": "/api/qa/history",
-            "conversations": "/api/qa/conversation/list"
-        }
-    })
+    # 检查是否存在前端构建的index.html文件
+    index_path = os.path.join(STATIC_FOLDER, 'index.html')
+    if os.path.exists(index_path):
+        return send_from_directory(STATIC_FOLDER, 'index.html')
+    else:
+        return jsonify({
+            "message": "智能问答系统API服务器正在运行",
+            "version": "1.0",
+            "status": "success",
+            "api_endpoints": {
+                "qa_ask": "/api/qa/ask",
+                "qa_history": "/api/qa/history",
+                "conversations": "/api/qa/conversation/list"
+            }
+        })
 
 app.add_url_rule('/', 'index', index)
+
+# 处理所有其他路径，返回前端index.html，支持前端路由
+@app.route('/<path:path>')
+def catch_all(path):
+    # 检查是否是静态资源
+    if os.path.exists(os.path.join(STATIC_FOLDER, path)):
+        return send_from_directory(STATIC_FOLDER, path)
+    # 否则返回前端index.html，让前端处理路由
+    elif os.path.exists(os.path.join(STATIC_FOLDER, 'index.html')):
+        return send_from_directory(STATIC_FOLDER, 'index.html')
+    else:
+        return jsonify({"error": "Resource not found"}), 404
 
 if __name__ == '__main__':
     # 确保基础存储目录存在
     if not os.path.exists(FILE_STORE_CONFIG['base_path']):
         os.makedirs(FILE_STORE_CONFIG['base_path'])
-    app.run(host='0.0.0.0', port=PORT) 
+    app.run(host=os.environ.get('FLASK_SERVICE_HOST', '0.0.0.0'), port=int(os.environ.get('FLASK_SERVICE_PORT', PORT))) 
