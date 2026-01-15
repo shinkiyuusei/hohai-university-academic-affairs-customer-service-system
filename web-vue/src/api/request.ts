@@ -2,7 +2,6 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
-import { useUserStore } from '@/stores/user'
 
 // 创建 axios 实例
 const instance: AxiosInstance = axios.create({
@@ -70,9 +69,10 @@ instance.interceptors.response.use(
 
     // 登录过期
     if (code === 401) {
-      const userStore = useUserStore()
-      // 不向后端发送请求，只清除本地状态
-      userStore.logout(false)
+      // 直接清除本地状态，避免循环依赖
+      localStorage.removeItem('userInfo')
+      // 跳转到登录页
+      window.location.href = '/login'
       return Promise.reject(new Error('登录已过期，请重新登录'))
     }
 
@@ -103,9 +103,10 @@ instance.interceptors.response.use(
           break
         case 401:
           message = '登录已过期，请重新登录'
-          const userStore = useUserStore()
-          // 不向后端发送请求，只清除本地状态
-          userStore.logout(false)
+          // 直接清除本地状态，避免循环依赖
+          localStorage.removeItem('userInfo')
+          // 跳转到登录页
+          window.location.href = '/login'
           break
         case 403:
           message = '没有权限访问该资源'

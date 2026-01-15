@@ -30,8 +30,6 @@ app.use(ElementPlus, {
 
 app.mount('#app')
 
-// 延迟初始化用户状态，避免循环依赖
-setTimeout(() => {
-  const userStore = useUserStore()
-  userStore.initUserInfo()
-}, 0)
+// 初始化用户状态
+const userStore = useUserStore()
+userStore.initUserInfo()
