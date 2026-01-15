@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import type { UserInfo, LoginResponse } from '@/types/user'
 import { login as userLogin, logout as userLogout, updatePassword as updateUserPassword, register as userRegister } from '@/api/user'
 import { ElMessage } from 'element-plus'
-import router from '@/router'
+const getRouter = async () => (await import('@/router')).default
 
 export const useUserStore = defineStore('user', () => {
   // 用户信息
@@ -43,6 +43,7 @@ export const useUserStore = defineStore('user', () => {
       }))
       ElMessage.success('登录成功')
       // 根据角色跳转到不同页面
+      const router = await getRouter()
       if (res.userInfo.role === 1) {
         router.push('/admin')
       } else {
@@ -76,12 +77,14 @@ export const useUserStore = defineStore('user', () => {
         ElMessage.success('退出成功')
       }
 
+      const router = await getRouter()
       router.push('/login')
     } catch (error) {
       // 即使出错也确保本地状态被清除
       userInfo.value = null
       token.value = null
       localStorage.removeItem('userInfo')
+      const router = await getRouter()
       router.push('/login')
 
       if (sendRequest) {
