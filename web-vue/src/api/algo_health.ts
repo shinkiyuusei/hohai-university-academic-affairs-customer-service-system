@@ -9,5 +9,5 @@ export interface HealthResponse {
 
 // 检查算法服务健康状态
 export const checkAlgoHealth = () => {
-  return request.get<HealthResponse>('/health/health_check')
+  return request.get<HealthResponse>('/api/health/health_check')
 }

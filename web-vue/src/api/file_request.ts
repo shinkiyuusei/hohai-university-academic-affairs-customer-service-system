@@ -86,7 +86,7 @@ const fileRequest = {
     if (isCache) {
       formData.append('is_cache', 'true')
     }
-    return service.post(`/file/upload/${bucket}`, formData, {
+    return service.post(`/api/file/upload/${bucket}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -102,7 +102,7 @@ const fileRequest = {
    * @returns 返回文件内容
    */
   get(bucket: string, objectKey: string, config?: AxiosRequestConfig): Promise<Blob> {
-    return service.get(`/file/${bucket}/${objectKey}`, {
+    return service.get(`/api/file/${bucket}/${objectKey}`, {
       responseType: 'blob',
       ...config,
     })
@@ -116,7 +116,7 @@ const fileRequest = {
    * @returns 返回响应数据
    */
   delete<T = any>(bucket: string, objectKey: string, config?: AxiosRequestConfig): Promise<T> {
-    return service.delete(`/file/${bucket}/${objectKey}`, config)
+    return service.delete(`/api/file/${bucket}/${objectKey}`, config)
   },
 
   /**
@@ -126,7 +126,7 @@ const fileRequest = {
    * @returns 返回文件访问URL
    */
   getFileUrl(bucket: string, objectKey: string): string {
-    return `${import.meta.env.VITE_API_URL}/file/${bucket}/${objectKey}`
+    return `${import.meta.env.VITE_API_URL}/api/file/${bucket}/${objectKey}`
   }
 }
 

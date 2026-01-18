@@ -68,7 +68,6 @@ app.register_blueprint(academic_info_bp)  # 新增：教务信息路由
 app.register_blueprint(admin_bp)  # 新增：管理员控制台路由
 # 注释：maintenance_bp已移除
 
-
 # 根路径处理
 def index():
     # 检查是否存在前端构建的index.html文件
@@ -90,6 +89,7 @@ def index():
 app.add_url_rule('/', 'index', index)
 
 # 处理所有其他路径，返回前端index.html，支持前端路由
+# 注意：这个路由必须在所有API路由注册之后，但在所有其他处理之前
 @app.route('/<path:path>', methods=['GET'])
 def catch_all(path):
     # 检查是否是API请求 - 如果是API请求，返回404而不是HTML

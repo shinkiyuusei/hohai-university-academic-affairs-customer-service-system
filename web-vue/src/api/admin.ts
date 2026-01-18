@@ -27,5 +27,5 @@ export interface DashboardStats {
  * 获取控制台仪表板数据
  */
 export const getDashboardData = () => {
-  return request.get<DashboardStats>('/admin/dashboard')
+  return request.get<DashboardStats>('/api/admin/dashboard')
 }

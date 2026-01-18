@@ -166,14 +166,14 @@ export function askQuestion(data: QARequest, image?: File) {
     }
     formData.append('image', image)
 
-    return request.post<QAResponse>('/qa/ask', formData, {
+    return request.post<QAResponse>('/api/qa/ask', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
   } else {
     // 纯文本问答，使用 JSON
-    return request.post<QAResponse>('/qa/ask', data)
+    return request.post<QAResponse>('/api/qa/ask', data)
   }
 }
 
@@ -181,54 +181,54 @@ export function askQuestion(data: QARequest, image?: File) {
  * 获取会话列表（当前用户）
  */
 export function getConversationList() {
-  return request.get<ConversationListResponse>('/qa/conversation/list')
+  return request.get<ConversationListResponse>('/api/qa/conversation/list')
 }
 
 /**
  * 获取所有用户的会话列表（仅管理员）
  */
 export function getAllConversations() {
-  return request.get<ConversationListResponse>('/qa/conversation/all')
+  return request.get<ConversationListResponse>('/api/qa/conversation/all')
 }
 
 /**
  * 创建新会话
  */
 export function createConversation(title?: string) {
-  return request.post<{ conversation_id: number }>('/qa/conversation/create', { title })
+  return request.post<{ conversation_id: number }>('/api/qa/conversation/create', { title })
 }
 
 /**
  * 删除会话
  */
 export function deleteConversation(conversationId: number) {
-  return request.delete(`/qa/conversation/${conversationId}`)
+  return request.delete(`/api/qa/conversation/${conversationId}`)
 }
 
 /**
  * 重命名会话
  */
 export function renameConversation(conversationId: number, title: string) {
-  return request.put(`/qa/conversation/${conversationId}/rename`, { title })
+  return request.put(`/api/qa/conversation/${conversationId}/rename`, { title })
 }
 
 /**
  * 获取会话消息列表
  */
 export function getConversationMessages(conversationId: number) {
-  return request.get<ConversationMessageListResponse>(`/qa/conversation/${conversationId}/messages`)
+  return request.get<ConversationMessageListResponse>(`/api/qa/conversation/${conversationId}/messages`)
 }
 
 /**
  * 清除会话的所有消息记录
  */
 export function clearConversationMessages(conversationId: number) {
-  return request.delete(`/qa/conversation/${conversationId}/messages`)
+  return request.delete(`/api/qa/conversation/${conversationId}/messages`)
 }
 
 /**
  * 根据会话聊天记录自动生成标题
  */
 export function generateConversationTitle(conversationId: number) {
-  return request.post<{ title: string }>(`/qa/conversation/${conversationId}/generate-title`)
+  return request.post<{ title: string }>(`/api/qa/conversation/${conversationId}/generate-title`)
 }

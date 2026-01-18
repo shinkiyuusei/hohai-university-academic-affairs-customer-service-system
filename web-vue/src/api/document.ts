@@ -5,7 +5,7 @@ import request from './request'
 export const documentApi = {
   // 上传文档
   upload: (data: FormData) => {
-    return request.post('/document/upload', data, {
+    return request.post('/api/document/upload', data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -18,17 +18,17 @@ export const documentApi = {
     size?: number
     keyword?: string
   }) => {
-    return request.get('/document/list', { params })
+    return request.get('/api/document/list', { params })
   },
 
   // 获取文档详情
   getDetail: (id: number) => {
-    return request.get(`/document/detail/${id}`)
+    return request.get(`/api/document/detail/${id}`)
   },
 
   // 删除文档
   delete: (id: number) => {
-    return request.delete(`/document/delete/${id}`)
+    return request.delete(`/api/document/delete/${id}`)
   },
 
   // 更新文档
@@ -37,11 +37,11 @@ export const documentApi = {
     summary?: string
     content?: string
   }) => {
-    return request.put(`/document/update/${id}`, data)
+    return request.put(`/api/document/update/${id}`, data)
   },
 
   // 使用本地Qwen模型生成文档摘要
   generateSummary: (content: string) => {
-    return request.post('/document/generate-summary', { content })
+    return request.post('/api/document/generate-summary', { content })
   }
 }

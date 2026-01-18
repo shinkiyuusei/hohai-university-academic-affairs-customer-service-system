@@ -8,7 +8,7 @@ import request from './request'
  * 获取知识图谱统计信息
  */
 export function getGraphStatistics() {
-  return request.get('/knowledge-graph/statistics')
+  return request.get('/api/knowledge-graph/statistics')
 }
 
 /**
@@ -21,7 +21,7 @@ export function getGraphStatistics() {
 export function buildGraphIncremental(data?: {
   document_ids?: number[]
 }) {
-  return request.post('/knowledge-graph/build-incremental', data || {})
+  return request.post('/api/knowledge-graph/build-incremental', data || {})
 }
 
 /**
@@ -32,7 +32,7 @@ export function buildGraphIncremental(data?: {
  * @returns { task_id: string } 任务ID，用于查询进度
  */
 export function rebuildGraphFull() {
-  return request.post('/knowledge-graph/rebuild-full')
+  return request.post('/api/knowledge-graph/rebuild-full')
 }
 
 /**
@@ -40,7 +40,7 @@ export function rebuildGraphFull() {
  * @param taskId 任务ID
  */
 export function getBuildStatus(taskId: string) {
-  return request.get(`/knowledge-graph/build-status/${taskId}`)
+  return request.get(`/api/knowledge-graph/build-status/${taskId}`)
 }
 
 /**
@@ -52,7 +52,7 @@ export function searchGraphEntities(data: {
   keywords: string[]
   limit?: number
 }) {
-  return request.post('/knowledge-graph/search', data)
+  return request.post('/api/knowledge-graph/search', data)
 }
 
 /**
@@ -82,7 +82,7 @@ export function findEntityPath(data: {
   end_entity: string
   max_depth?: number
 }) {
-  return request.post('/knowledge-graph/path', data)
+  return request.post('/api/knowledge-graph/path', data)
 }
 
 /**
@@ -98,7 +98,7 @@ export function getRelatedEntities(
     depth?: number
   }
 ) {
-  return request.get(`/knowledge-graph/related/${entityName}`, { params })
+  return request.get(`/api/knowledge-graph/related/${entityName}`, { params })
 }
 
 /**
@@ -108,19 +108,19 @@ export function getRelatedEntities(
 export function getGraphVisualizationData(params?: {
   limit?: number
 }) {
-  return request.get('/knowledge-graph/visualization', { params })
+  return request.get('/api/knowledge-graph/visualization', { params })
 }
 
 /**
  * 清空知识图谱
  */
 export function clearGraph() {
-  return request.post('/knowledge-graph/clear')
+  return request.post('/api/knowledge-graph/clear')
 }
 
 /**
  * 获取知识图谱配置（节点类型和关系类型的中文映射）
  */
 export function getGraphConfig() {
-  return request.get('/knowledge-graph/config')
+  return request.get('/api/knowledge-graph/config')
 }
