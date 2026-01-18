@@ -90,7 +90,7 @@ def index():
 app.add_url_rule('/', 'index', index)
 
 # 处理所有其他路径，返回前端index.html，支持前端路由
-@app.route('/<path:path>')
+@app.route('/<path:path>', methods=['GET'])
 def catch_all(path):
     # 检查是否是静态资源
     if os.path.exists(os.path.join(STATIC_FOLDER, path)):
