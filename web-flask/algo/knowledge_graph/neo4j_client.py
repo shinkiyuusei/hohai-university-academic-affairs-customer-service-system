@@ -24,14 +24,27 @@ class Neo4jClient:
             user: 用户名
             password: 密码
         """
-        try:
-            self.driver = GraphDatabase.driver(uri, auth=(user, password))
-            # 测试连接
-            self.driver.verify_connectivity()
-            logger.info("Neo4j连接成功")
-        except Exception as e:
-            logger.error(f"Neo4j连接失败: {str(e)}")
-            raise
+        self.driver = None
+        max_retries = 5
+        retry_delay = 10  # 秒
+        
+        for attempt in range(max_retries):
+            try:
+                self.driver = GraphDatabase.driver(uri, auth=(user, password))
+                # 测试连接
+                self.driver.verify_connectivity()
+                logger.info("Neo4j连接成功")
+                break
+            except Exception as e:
+                logger.warning(f"Neo4j连接失败 (尝试 {attempt + 1}/{max_retries}): {str(e)}")
+                if attempt < max_retries - 1:
+                    logger.info(f"等待 {retry_delay} 秒后重试...")
+                    import time
+                    time.sleep(retry_delay)
+                    retry_delay *= 2  # 指数退避
+                else:
+                    logger.error(f"Neo4j连接最终失败: {str(e)}")
+                    raise
 
     def close(self):
         """关闭数据库连接"""

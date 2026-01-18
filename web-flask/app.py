@@ -92,6 +92,10 @@ app.add_url_rule('/', 'index', index)
 # 处理所有其他路径，返回前端index.html，支持前端路由
 @app.route('/<path:path>', methods=['GET'])
 def catch_all(path):
+    # 检查是否是API请求 - 如果是API请求，返回404而不是HTML
+    if path.startswith('api/'):
+        return jsonify({"error": "API endpoint not found"}), 404
+    
     # 检查是否是静态资源
     if os.path.exists(os.path.join(STATIC_FOLDER, path)):
         return send_from_directory(STATIC_FOLDER, path)

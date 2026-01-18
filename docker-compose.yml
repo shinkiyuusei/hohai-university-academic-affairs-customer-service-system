@@ -20,7 +20,8 @@ services:
       - FLASK_TEMP_DIR=/app/web-flask/temp
       - FILE_STORE_PATH=/app/web-flask/file_store
     depends_on:
-      - neo4j
+      neo4j:
+        condition: service_healthy
     volumes:
       - ./data:/app/data
       - ./web-flask/file_store:/app/web-flask/file_store
@@ -45,6 +46,12 @@ services:
       - neo4j_logs:/logs
       - ./data/neo4j_import:/var/lib/neo4j/import
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p secure_neo4j_password 'RETURN 1;' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
 
   nginx:
     image: nginx:latest
