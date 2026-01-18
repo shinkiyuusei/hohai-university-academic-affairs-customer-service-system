@@ -4,7 +4,12 @@ import { ref } from 'vue'
 import type { UserInfo, LoginResponse } from '@/types/user'
 import { login as userLogin, logout as userLogout, updatePassword as updateUserPassword, register as userRegister } from '@/api/user'
 import { ElMessage } from 'element-plus'
-const getRouter = async () => (await import('@/router')).default
+
+// 创建导航函数避免循环依赖
+const navigateTo = async (path: string) => {
+  const router = (await import('@/router')).default
+  router.push(path)
+}
 
 export const useUserStore = defineStore('user', () => {
   // 用户信息
@@ -43,11 +48,10 @@ export const useUserStore = defineStore('user', () => {
       }))
       ElMessage.success('登录成功')
       // 根据角色跳转到不同页面
-      const router = await getRouter()
       if (res.userInfo.role === 1) {
-        router.push('/admin')
+        await navigateTo('/admin')
       } else {
-        router.push('/dashboard')
+        await navigateTo('/dashboard')
       }
     } catch (error) {
       ElMessage.error('登录失败')
@@ -77,15 +81,13 @@ export const useUserStore = defineStore('user', () => {
         ElMessage.success('退出成功')
       }
 
-      const router = await getRouter()
-      router.push('/login')
+      await navigateTo('/login')
     } catch (error) {
       // 即使出错也确保本地状态被清除
       userInfo.value = null
       token.value = null
       localStorage.removeItem('userInfo')
-      const router = await getRouter()
-      router.push('/login')
+      await navigateTo('/login')
 
       if (sendRequest) {
         ElMessage.error('退出失败')
