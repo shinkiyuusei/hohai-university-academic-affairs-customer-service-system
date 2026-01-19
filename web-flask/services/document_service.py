@@ -33,7 +33,7 @@ class DocumentService:
             if not DocumentExtractor.is_supported_file_type(file.filename):
                 return {
                     'success': False,
-                    'error': '不支持的文件类型，仅支持txt、docx、doc、pdf格式'
+                    'error': '不支持的文件类型，仅支持txt、docx、pdf格式'
                 }
             
             # 获取文件类型

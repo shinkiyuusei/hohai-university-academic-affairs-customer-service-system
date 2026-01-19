@@ -17,7 +17,7 @@
     "echarts": "^5.6.0",
     "element-plus": "^2.8.4",
     "flv.js": "^1.6.2",
-    "marked": "16.3.0",
+    "marked": "^9.1.6",
     "nprogress": "^0.2.0",
     "pinia": "^2.3.1",
     "sass": "^1.84.0",

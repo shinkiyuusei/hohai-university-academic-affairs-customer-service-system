@@ -27,8 +27,10 @@ class DocumentExtractor:
         try:
             if file_type.lower() == 'txt':
                 return DocumentExtractor._extract_txt(file_path)
-            elif file_type.lower() in ['docx', 'doc']:
+            elif file_type.lower() == 'docx':
                 return DocumentExtractor._extract_docx(file_path)
+            elif file_type.lower() == 'doc':
+                return DocumentExtractor._extract_doc(file_path)
             elif file_type.lower() == 'pdf':
                 return DocumentExtractor._extract_pdf(file_path)
             else:
@@ -73,6 +75,17 @@ class DocumentExtractor:
                     'success': False,
                     'error': f'TXT文件读取失败: {str(e)}'
                 }
+    
+    @staticmethod
+    def _extract_doc(file_path: str) -> Dict:
+        """
+        提取DOC文件内容
+        注意：.doc是旧版Word格式，建议转换为.docx格式
+        """
+        return {
+            'success': False,
+            'error': '不支持.doc格式的文件。请将文件另存为.docx格式后重新上传。'
+        }
     
     @staticmethod
     def _extract_docx(file_path: str) -> Dict:
@@ -183,4 +196,4 @@ class DocumentExtractor:
     def is_supported_file_type(filename: str) -> bool:
         """检查是否为支持的文件类型"""
         file_type = DocumentExtractor.get_file_type(filename)
-        return file_type in ['txt', 'docx', 'doc', 'pdf']
+        return file_type in ['txt', 'docx', 'pdf']
