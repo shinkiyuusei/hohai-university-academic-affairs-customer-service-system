@@ -379,18 +379,13 @@ const handleAvatarChange: UploadProps['onChange'] = async (uploadFile) => {
       avatarBucket: bucket,
       avatarObjectKey: objectKey
     }
-    await updateUser(updateParams)
+    const updatedUserInfo = await updateUser(updateParams)
 
-    // 更新本地用户信息
+    // 使用API返回的最新用户信息更新本地存储
     const storedUserInfo = localStorage.getItem('userInfo')
-    if (storedUserInfo) {
+    if (storedUserInfo && updatedUserInfo) {
       const data = JSON.parse(storedUserInfo)
-      data.userInfo = {
-        ...data.userInfo,
-        avatarBucket: bucket,
-        avatarObjectKey: objectKey,
-        avatarUrl: fileRequest.getFileUrl(bucket, objectKey)
-      }
+      data.userInfo = updatedUserInfo
       localStorage.setItem('userInfo', JSON.stringify(data))
       userStore.initUserInfo()
     }

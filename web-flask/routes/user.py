@@ -83,7 +83,14 @@ def update_user():
             return error('没有权限更新该用户信息', 403)
         
         if user_service.update_user(user_id, data):
-            return success(None, '更新成功')
+            # 返回更新后的用户信息
+            updated_user = user_service.get_user_by_id(user_id)
+            if updated_user:
+                from utils.models import UserInfo
+                user_info = UserInfo(updated_user)
+                return success(user_info.to_dict(), '更新成功')
+            else:
+                return success(None, '更新成功')
         else:
             return error('更新失败', 400)
     except Exception as e:

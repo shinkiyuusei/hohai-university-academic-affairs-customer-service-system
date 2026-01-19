@@ -53,7 +53,7 @@ export const addUser = (data: UserForm) => {
 
 // 修改用户
 export const updateUser = (data: UserForm) => {
-  return request.put<void>('/api/user', data)
+  return request.put<UserInfo>('/api/user', data)
 }
 
 // 删除用户
