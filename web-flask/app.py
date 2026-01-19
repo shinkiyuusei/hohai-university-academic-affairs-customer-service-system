@@ -36,6 +36,9 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 CORS(app)
 
+# 设置最大请求体大小为100MB（与FILE_STORE_CONFIG中的max_size保持一致）
+app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB
+
 # 静态文件目录
 STATIC_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
 app.static_folder = STATIC_FOLDER

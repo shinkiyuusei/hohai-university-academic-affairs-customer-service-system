@@ -6,7 +6,6 @@ export interface DashboardStats {
     totalUsers: number
     totalDocuments: number
     totalGraphNodes: number
-    totalDiseaseCases: number
     totalConversations: number
     totalDiseases: number
   }
@@ -15,8 +14,6 @@ export interface DashboardStats {
     months: string[]
     counts: number[]
   }
-  plantTypeStats: Array<{ plant_type: string, count: number }>
-  severityStats: Array<{ severity_level: string, count: number }>
   conversationTrendData: {
     months: string[]
     counts: number[]

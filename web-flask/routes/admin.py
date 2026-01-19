@@ -22,7 +22,6 @@ def get_dashboard_test_data():
                 'totalUsers': 100,
                 'totalDocuments': 250,
                 'totalGraphNodes': 150,
-                'totalDiseaseCases': 80,
                 'totalConversations': 320,
                 'totalDiseases': 45
             },
@@ -35,17 +34,7 @@ def get_dashboard_test_data():
                 'months': ['2025-07', '2025-08', '2025-09', '2025-10', '2025-11', '2025-12'],
                 'counts': [15, 20, 18, 22, 15, 10]
             },
-            'plantTypeStats': [
-                {'plant_type': '小麦', 'count': 30},
-                {'plant_type': '水稻', 'count': 25},
-                {'plant_type': '玉米', 'count': 20},
-                {'plant_type': '棉花', 'count': 5}
-            ],
-            'severityStats': [
-                {'severity_level': '轻度', 'count': 40},
-                {'severity_level': '中度', 'count': 25},
-                {'severity_level': '严重', 'count': 15}
-            ],
+
             'conversationTrendData': {
                 'months': ['2025-07', '2025-08', '2025-09', '2025-10', '2025-11', '2025-12'],
                 'counts': [50, 60, 55, 70, 50, 35]
@@ -79,10 +68,7 @@ def get_dashboard_data():
         cursor.execute("SELECT COUNT(*) as count FROM document WHERE is_graph_built = 1")
         stats['totalGraphNodes'] = cursor.fetchone()['count']
         
-        # 病害案例数
-        cursor.execute("SELECT COUNT(*) as count FROM disease_case")
-        stats['totalDiseaseCases'] = cursor.fetchone()['count']
-        
+
         # 问答会话数
         cursor.execute("SELECT COUNT(*) as count FROM conversation")
         stats['totalConversations'] = cursor.fetchone()['count']
@@ -110,14 +96,7 @@ def get_dashboard_data():
             )
             monthly_user_counts.append(cursor.fetchone()['count'])
         
-        # 获取病害案例植物类型分布
-        cursor.execute("SELECT plant_type, COUNT(*) as count FROM disease_case GROUP BY plant_type")
-        plant_type_stats = [dict(row) for row in cursor.fetchall()]
-        
-        # 获取病害案例严重程度分布
-        cursor.execute("SELECT severity_level, COUNT(*) as count FROM disease_case GROUP BY severity_level")
-        severity_stats = [dict(row) for row in cursor.fetchall()]
-        
+
         # 获取问答会话趋势（最近6个月）
         monthly_conversation_counts = []
         for month_key in months:
@@ -137,8 +116,7 @@ def get_dashboard_data():
                 'months': months,
                 'counts': monthly_user_counts
             },
-            'plantTypeStats': plant_type_stats,
-            'severityStats': severity_stats,
+
             'conversationTrendData': {
                 'months': months,
                 'counts': monthly_conversation_counts

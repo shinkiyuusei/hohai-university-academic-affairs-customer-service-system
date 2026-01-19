@@ -28,6 +28,10 @@ def get_application_root():
 HOST = os.environ.get('FLASK_SERVICE_HOST', 'localhost')
 PORT = int(os.environ.get('FLASK_SERVICE_PORT', 5010))
 
+# 外网访问配置
+EXTERNAL_HOST = os.environ.get('EXTERNAL_HOST', HOST)
+EXTERNAL_PORT = int(os.environ.get('EXTERNAL_PORT', 80))
+
 # 数据库配置
 DB_PATH = os.environ.get('DB_PATH', os.path.join(get_application_root(), 'yyxz_sqlite.db'))
 
@@ -42,7 +46,7 @@ os.makedirs(TEMP_DIR, exist_ok=True)  # 创建临时文件目录
 # 定义文件上传、存储及访问的安全策略，包含文件类型白名单与大小限制
 FILE_STORE_CONFIG = {
     'base_path': os.environ.get('FILE_STORE_PATH', os.path.join(get_application_root(), 'file_store')),
-    'access_url': f'http://{HOST}:{PORT}/api/file',  # 文件访问URL前缀
+    'access_url': f'http://{EXTERNAL_HOST}:{EXTERNAL_PORT}/api/file',  # 文件访问URL前缀
     'allowed_types': [
         'image/jpeg',            # JPG/JPEG图片 (.jpg, .jpeg)
         'image/png',             # PNG图片 (.png)

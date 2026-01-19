@@ -58,14 +58,7 @@
             <el-icon><Connection /></el-icon>
             <template #title>图谱可视化</template>
           </el-menu-item>
-          <el-menu-item index="/admin/plant-disease">
-            <el-icon><Grape /></el-icon>
-            <template #title>植物病害</template>
-          </el-menu-item>
-          <el-menu-item index="/admin/disease-case">
-            <el-icon><WarningFilled /></el-icon>
-            <template #title>病害案例</template>
-          </el-menu-item>
+
         </template>
       </el-menu>
     </el-aside>
